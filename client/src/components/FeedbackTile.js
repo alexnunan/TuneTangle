@@ -5,7 +5,11 @@ const FeedbackTile = ({title, artist, album, genre, releaseYear, duration}) => {
     const reformatDuration = (timeInSeconds) => {
         const minutes = Math.floor(timeInSeconds/60)
         const seconds = timeInSeconds - minutes * 60
-        return `${minutes}:${seconds}`
+        if (seconds>=10){
+            return `${minutes}:${seconds}`
+        } else {
+            return `${minutes}:0${seconds}`
+        }
     }
 
     return (
