@@ -1,7 +1,7 @@
 @import "./foundation/settings";
 @import "~foundation-sites/scss/foundation";
 @include foundation-everything;
-// place global css here
+
 *,
 *::before,
 *::after {
@@ -21,4 +21,22 @@
   text-align: center;
   margin-left: 30%;
   margin-right: 30%;
+}
+
+.feedback-headers {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.feedback-section {
+  text-align: center;
+  background-color: rgb(168, 168, 168);
+  border-style: solid;
+  border-color: black;
+  margin-bottom: 10px;
+}
+
+.feedback-body {
+  margin-left: 75px;
+  margin-right: 75px;
 }
