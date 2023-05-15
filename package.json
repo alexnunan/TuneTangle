@@ -1,0 +1,22 @@
+{
+  "type": "module",
+  "private": true,
+  "workspaces": [
+    "server",
+    "client",
+    "e2e"
+  ],
+  "scripts": {
+    "build:client": "yarn workspace TuneTangle-client build",
+    "dev": "yarn workspace TuneTangle-server dev",
+    "dev:debug": "yarn workspace TuneTangle-server dev:debug",
+    "heroku-postbuild": "yarn workspace TuneTangle-client build",
+    "start": "yarn workspace TuneTangle-server start",
+    "dev:cypress": "yarn workspace TuneTangle-server dev:e2e",
+    "e2e:open": "yarn workspace TuneTangle-e2e e2e:open",
+    "e2e:run": "yarn workspace TuneTangle-e2e e2e:run"
+  },
+  "engines": {
+    "node": "^16.18"
+  }
+}
