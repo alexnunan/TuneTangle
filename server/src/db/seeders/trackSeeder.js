@@ -74,6 +74,46 @@ class TrackSeeder {
             releaseYear: 1966,
             album: "Parsley, Sage, Rosemary and Thyme",
             duration: 149
+        },
+        {
+            title: "House of the Rising Sun",
+            artist: "The Animals",
+            genre: "Blues",
+            releaseYear: 1964,
+            album: "The Animals",
+            duration: 272
+        },
+        {
+            title: "Time after Time",
+            artist: "Cyndi Lauper",
+            genre: "Pop",
+            releaseYear: 1983,
+            album: "She's So Unusual",
+            duration: 296
+        },
+        {
+            title: "Devil In a New Dress",
+            artist: "Kanye West",
+            genre: "Rap",
+            releaseYear: 2010,
+            album: "My Beautiful Dark Twisted Fantasy",
+            duration: 351
+        },
+        {
+            title: "Power",
+            artist: "Kanye West",
+            genre: "Rap",
+            releaseYear: 2010,
+            album: "My Beautiful Dark Twisted Fantasy",
+            duration: 293
+        },
+        {
+            title: "Here Comes the Rain Again",
+            artist: "Eurythmics",
+            genre: "Pop",
+            releaseYear: 1983,
+            album: "Touch",
+            duration: 302
         }]
 
         for (const track of tracks) {

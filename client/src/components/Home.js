@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FeedbackTile from "./FeedbackTile";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField"
 
 const Home = () => {
 
     const [songSearch, setSongSearch] = useState("")
     const [guessedSongs, setGuessedSongs] = useState([])
+    const [dropDownTracks, setDropDownTracks] = useState([])
+    // const [showDropdown, setShowDropdown] = useState(false)
 
     const postSongTitleGuess = async () => {
         try {
@@ -32,59 +36,91 @@ const Home = () => {
         }
     }
 
-    const handleInputChange = event => {
-        setSongSearch(event.currentTarget.value)
+    const getDropDownSuggestions = async () => {
+        try {
+            const response = await fetch(`/api/v1/guess/${songSearch}`)
+            if(!response.ok) {
+                const errorMessage = `${response.status} (${response.statusText})`
+                const error = new Error(errorMessage)
+                throw error
+            }
+            const body = await response.json()
+            setDropDownTracks(body.suggestedTracks)
+        } catch (err) {
+            console.error(`Error in fetch: ${err.message}`)
+        }
     }
 
-    const handleSubmit = event => {
+    useEffect(() => {
+        getDropDownSuggestions();
+    }, [songSearch])
+    
+    const handleInputChange = (event) => {
+        setSongSearch(event.currentTarget.value);
+        // setShowDropdown(true)
+    };
+    
+    const handleDropdownSelection = (event, newValue) => {
+        setSongSearch(newValue);
+        // setShowDropdown(false)
+    };
+    
+    const handleSubmit = (event) => {
         event.preventDefault()
         postSongTitleGuess()
-    }
+    };
+    
+    const feedbackTiles = guessedSongs.map((song) => {
+        return <FeedbackTile key={song.id} {...song} />;
+    });
 
-    const feedbackTiles = guessedSongs.map(song => {
-        return (
-            <FeedbackTile key={song.id} {...song} />
-        )
+    const dropDownOptions = dropDownTracks.map((track, index) => {
+        return track.title
     })
-
+    
     return (
         <div>
             <h1 className="home-header">Tune Tangle</h1>
-            <form className="song-search" onSubmit={handleSubmit}>
-                <label>
-                    Enter a song:
-                    <input
-                        type="text"
-                        name="songSearch"
-                        onChange={handleInputChange}
-                        value={songSearch}
-                    />
-                </label>
-                <input type="submit" value="Submit"/>
-            </form>
+            <div className="song-search">
+                <form onSubmit={handleSubmit} className="form">
+                    <div className="form__center-content">
+                        <Autocomplete
+                            disablePortal
+                            id="combo-box-demo"
+                            onChange={handleDropdownSelection}
+                            options={dropDownOptions}
+                            className="input-text"
+                            sx={{ width: 400 }}
+                            renderInput={(params) => <TextField {...params} onChange={handleInputChange} label="Guess a Song" />}
+                        />
+                        
+                        <input type="submit" value="Submit" className="input-submit" />
+                    </div>
+                </form> 
+            </div>
             <div className="grid-x feedback-body">
                 <div className="cell small-2 feedback-headers">
-                    <p>Title:</p>
-                </div>
-                <div className="cell small-2 feedback-headers">
-                    <p>Artist:</p>
-                </div>
-                <div className="cell small-2 feedback-headers">
-                    <p>Album:</p>
-                </div>
-                <div className="cell small-2 feedback-headers">
-                    <p>Genre:</p>
-                </div>
-                <div className="cell small-2 feedback-headers">
-                    <p>Release Year:</p>
-                </div>
-                <div className="cell small-2 feedback-headers">
-                    <p>Duration:</p>
+                        <p>Title:</p>
+                    </div>
+                    <div className="cell small-2 feedback-headers">
+                        <p>Artist:</p>
+                    </div>
+                    <div className="cell small-2 feedback-headers">
+                        <p>Album:</p>
+                    </div>
+                    <div className="cell small-2 feedback-headers">
+                        <p>Genre:</p>
+                    </div>
+                    <div className="cell small-2 feedback-headers">
+                        <p>Release Year:</p>
+                    </div>
+                    <div className="cell small-2 feedback-headers">
+                        <p>Duration:</p>
                 </div>
             </div>
             {feedbackTiles}
         </div>
     )
 }
-
+    
 export default Home
