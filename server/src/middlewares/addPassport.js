@@ -26,6 +26,7 @@ const spotifyHandler = async (accessToken, refreshToken, expires_in, profile, do
     User.query().insertAndFetch({ 
         spotifyId: profile.id, 
         accessToken: accessToken,
+        refreshToken: refreshToken
     }).then((user) => {
         return done(null, user);
     })

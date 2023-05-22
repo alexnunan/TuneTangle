@@ -6,6 +6,7 @@ import getCurrentUser from "../services/getCurrentUser";
 import "../assets/scss/main.scss";
 import TopBar from "./layout/TopBar";
 import Home from "./Home";
+import playlistSelection from "./PlaylistSelection";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -27,6 +28,7 @@ const App = (props) => {
       <TopBar user={currentUser} />
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/playlistSelection" component={playlistSelection} />
       </Switch>
     </Router>
   );

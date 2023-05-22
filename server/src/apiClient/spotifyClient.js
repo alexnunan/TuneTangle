@@ -33,12 +33,13 @@ class spotifyClient {
             })
             const responseParsed = await JSON.parse(apiResponse.body)
             const responseItems = responseParsed.items
+            const returnedPlaylists = []
             responseItems.forEach(playlist => {
                 if (playlist.tracks.total > 50) {
-                    console.log(playlist.name)
+                    returnedPlaylists.push(playlist.name)
                 }
             })
-            return apiResponse
+            return returnedPlaylists
         } catch (err) {
             console.log(err.message)
             return { errors: err.message }
