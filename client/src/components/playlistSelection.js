@@ -33,10 +33,9 @@ const playlistSelection = () => {
     return (
         <div>
             <h1 className="home-header">Select Your Playlist</h1>
-            <div className="grid-x">
-                <h5 className="cell small-6">Your Playlists</h5>
+            <div>
+                <h5>Your Playlists</h5>
                 {displayUserPlaylists}
-                <h5 className="cell small-6">Preselected Playlists</h5>
             </div>
         </div>
     )
