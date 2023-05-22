@@ -49,9 +49,13 @@
 .input-text {
   width: 400px;
   margin: 5px;
-  text-align: center;     /* will center text in <p>, which is not a flex item */
+  text-align: center;
 }
 
 .input-submit {
   border-radius: 16px;
+}
+
+.small-margin {
+  margin-left: 10px;
 }
