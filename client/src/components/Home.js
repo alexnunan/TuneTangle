@@ -8,7 +8,6 @@ const Home = () => {
     const [songSearch, setSongSearch] = useState("")
     const [guessedSongs, setGuessedSongs] = useState([])
     const [dropDownTracks, setDropDownTracks] = useState([])
-    // const [showDropdown, setShowDropdown] = useState(false)
 
     const postSongTitleGuess = async () => {
         try {
@@ -57,12 +56,10 @@ const Home = () => {
     
     const handleInputChange = (event) => {
         setSongSearch(event.currentTarget.value);
-        // setShowDropdown(true)
     };
     
     const handleDropdownSelection = (event, newValue) => {
         setSongSearch(newValue);
-        // setShowDropdown(false)
     };
     
     const handleSubmit = (event) => {
