@@ -7,6 +7,7 @@ import "../assets/scss/main.scss";
 import TopBar from "./layout/TopBar";
 import Home from "./Home";
 import playlistSelection from "./PlaylistSelection";
+import LoginPage from "./LoginPage";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -27,8 +28,9 @@ const App = (props) => {
     <Router>
       <TopBar user={currentUser} />
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" component={LoginPage} />
         <Route exact path="/playlistSelection" component={playlistSelection} />
+        <Route exact path="/game" component={Home} />
       </Switch>
     </Router>
   );

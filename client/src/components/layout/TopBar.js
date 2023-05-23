@@ -4,9 +4,13 @@ import SignOutButton from "../authentication/SignOutButton";
 
 const TopBar = ({ user }) => {
   const unauthenticatedListItems = [
-    <li key="sign-in">
-      <Link to="/auth/spotify/callback" className="button">Sign In With Spotify</Link>
-    </li>,
+    <div className="top-bar center-parent center-child">
+        <ul className="menu">
+          <li>
+            <h1>TuneTangle</h1>
+          </li>
+        </ul>
+    </div>
   ];
 
   const authenticatedListItems = [
@@ -15,21 +19,29 @@ const TopBar = ({ user }) => {
     </li>,
   ];
 
-  return (
-    <div className="top-bar">
-      <div className="top-bar-left">
-        <ul className="menu">
-          <li className="menu-text">App</li>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-        </ul>
+  if (user) {
+    return (
+      <div className="top-bar">
+        <div className="top-bar-left">
+          <ul className="menu">
+            <li className="menu-text">App</li>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+          </ul>
+        </div>
+        <div className="top-bar-right">
+          <ul className="menu">{authenticatedListItems}</ul>
+        </div>
       </div>
-      <div className="top-bar-right">
-        <ul className="menu">{user ? authenticatedListItems : unauthenticatedListItems}</ul>
+    );
+  } else {
+    return (
+      <div>
+        {unauthenticatedListItems}
       </div>
-    </div>
-  );
+    )
+  }
 };
 
 export default TopBar;
