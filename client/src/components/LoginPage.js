@@ -5,7 +5,7 @@ const LoginPage = () => {
     return (
         <div className="login-container">
             <div className="login-content">
-                <h2 className="login-header">How to Play TuneTangle</h2>
+                <h2 className="login-header">How to Play</h2>
                 <div className="login-instructions">
                     <p>Login with your Spotify account.</p>
                     <p>Choose a playlist to play.</p>
@@ -27,7 +27,7 @@ const LoginPage = () => {
             </div>
             <p className="login-note">Note: TuneTangle is powered by ReactJS and Spotify API integration for a seamless experience.</p>
             <div className="login-button-container">
-                <Link to="/auth/spotify/callback" className="login-button">Sign In With Spotify</Link>
+                <a href="http://localhost:3000/auth/spotify/callback" className="login-button">Sign In With Spotify</a>
             </div>
         </div>
     );

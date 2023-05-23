@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 
 const playlistSelection = () => {
 
     const [userPlaylists, setUserPlaylists] = useState([])
+    const [gameId, setGameId] = useState(null)
+    const [shouldRedirect, setShouldRedirect] = useState(false)
 
     const getUserPlaylists = async () => {
         try {
@@ -13,10 +16,38 @@ const playlistSelection = () => {
                 throw error
             }
             const body = await response.json()
-            console.log(body.userPlaylists)
             setUserPlaylists(body.userPlaylists)
         } catch (err) {
             console.error(`Error in fetch: ${err.message}`)
+        }
+    }
+
+    const postSelectedPlaylist = async (playlistId) => {
+        try {
+            const response = await fetch("/api/v1/game", {
+                method: "POST",
+                headers: new Headers({
+                    "Content-Type": "application/json"
+                }),
+                body: JSON.stringify( { playlistId: playlistId } )
+            })
+            if (!response.ok) {
+                if (response.status === 422) {
+                    const errorBody = await response.json()
+                    const newErrors = translateServerErrors(errorBody.errors)
+                    return setErrors(newErrors)
+                } else {
+                    const errorMessage = await response.json()
+                    throw new Error(errorMessage)
+                }
+            } 
+            const responseBody = await response.json()
+            const newGameId = responseBody.newGameId
+            setGameId(newGameId)
+            setShouldRedirect(true)
+            
+        } catch(err) {
+            console.error("Error in fetch", err.message)
         }
     }
 
@@ -26,9 +57,13 @@ const playlistSelection = () => {
 
     const displayUserPlaylists = userPlaylists.map((playlist, index) => {
         return (
-            <p className="small-margin" key={index}>{playlist}</p>
+            <p onClick={ ()=> {postSelectedPlaylist(playlist.spotifyId)}} className="small-margin button" key={index}>{playlist.name}</p>
         )
     })
+
+    if(shouldRedirect) {
+        return <Redirect to={`/game/${gameId}`}/>
+    }
 
     return (
         <div>

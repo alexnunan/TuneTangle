@@ -6,7 +6,7 @@ import getCurrentUser from "../services/getCurrentUser";
 import "../assets/scss/main.scss";
 import TopBar from "./layout/TopBar";
 import Home from "./Home";
-import playlistSelection from "./PlaylistSelection";
+import playlistSelection from "./playlistSelection";
 import LoginPage from "./LoginPage";
 
 const App = (props) => {
@@ -30,7 +30,7 @@ const App = (props) => {
       <Switch>
         <Route exact path="/" component={LoginPage} />
         <Route exact path="/playlistSelection" component={playlistSelection} />
-        <Route exact path="/game" component={Home} />
+        <Route exact path="/game/:id" component={Home} />
       </Switch>
     </Router>
   );
