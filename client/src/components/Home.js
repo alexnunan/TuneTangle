@@ -33,7 +33,6 @@ const Home = (props) => {
             console.error("Error in fetch", err.message)
         }
     }
-    console.log(songSearch)
 
     const getPlaylistTracks = async () => {
         try {
