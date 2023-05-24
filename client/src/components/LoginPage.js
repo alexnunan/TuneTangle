@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const LoginPage = () => {
     return (
@@ -27,13 +26,10 @@ const LoginPage = () => {
             </div>
             <p className="login-note">Note: TuneTangle is powered by ReactJS and Spotify API integration for a seamless experience.</p>
             <div className="login-button-container">
-                <a href="http://localhost:3000/auth/spotify/callback" className="login-button">Sign In With Spotify</a>
+                <a href="/auth/spotify/callback" className="login-button">Sign In With Spotify</a>
             </div>
         </div>
     );
 };
 
 export default LoginPage;
-
-
-

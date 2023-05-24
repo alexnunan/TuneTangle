@@ -3,8 +3,7 @@ import FeedbackTile from "./FeedbackTile";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField"
 
-const Home = () => {
-
+const Home = (props) => {
     const [songSearch, setSongSearch] = useState("")
     const [guessedSongs, setGuessedSongs] = useState([])
     const [dropDownTracks, setDropDownTracks] = useState([])
@@ -35,24 +34,26 @@ const Home = () => {
         }
     }
 
-    const getDropDownSuggestions = async () => {
+    const getPlaylistTracks = async () => {
         try {
-            const response = await fetch(`/api/v1/guess/${songSearch}`)
+            const gameId = props.match.params.id
+            const response = await fetch(`/api/v1/game/${gameId}`)
             if(!response.ok) {
                 const errorMessage = `${response.status} (${response.statusText})`
                 const error = new Error(errorMessage)
                 throw error
             }
             const body = await response.json()
-            setDropDownTracks(body.suggestedTracks)
+            console.log(body.playlistTracks)
+            setDropDownTracks(body.playlistTracks)
         } catch (err) {
             console.error(`Error in fetch: ${err.message}`)
         }
     }
 
     useEffect(() => {
-        getDropDownSuggestions();
-    }, [songSearch])
+        getPlaylistTracks();
+    }, [])
     
     const handleInputChange = (event) => {
         setSongSearch(event.currentTarget.value);
