@@ -15,7 +15,20 @@ gameRouter.post("/", async (req, res) => {
 
         const newGame = await Game.query().insertAndFetch({spotifyId: userId, playlistId: selectedPlaylistId, randomSongId: randomSongId})
         
-        return res.status(200).json({newGameId : newGame.id })
+        return res.status(200).json({ newGameId : newGame.id })
+    } catch (err) {
+        return res.status(500).json({ errors: err.message })
+    }
+})
+
+gameRouter.get("/:id", async (req, res) => {
+    try {
+        const accessToken = req.user.accessToken
+        const { id } = req.params
+        const game = await Game.query().findById(id)
+        const playlistTracks = await spotifyClient.getPlaylistTracks(accessToken, game.playlistId)
+
+        return res.status(200).json({ playlistTracks : playlistTracks })
     } catch (err) {
         return res.status(500).json({ errors: err.message })
     }
