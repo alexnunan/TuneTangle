@@ -8,14 +8,16 @@ const Home = (props) => {
     const [guessedSongs, setGuessedSongs] = useState([])
     const [dropDownTracks, setDropDownTracks] = useState([])
 
-    const postSongTitleGuess = async () => {
+    const gameId = props.match.params.id
+
+    const postSongTitleGuess = async (trackId) => {
         try {
-            const response = await fetch("/api/v1/guess", {
+            const response = await fetch(`/api/v1/game/${gameId}/guess`, {
                 method: "POST",
                 headers: new Headers({
                     "Content-Type": "application/json"
                 }),
-                body: JSON.stringify( {songGuess: songSearch} )
+                body: JSON.stringify( {trackId: trackId} )
             })
             if (!response.ok) {
                 if (response.status === 422) {
@@ -36,7 +38,6 @@ const Home = (props) => {
 
     const getPlaylistTracks = async () => {
         try {
-            const gameId = props.match.params.id
             const response = await fetch(`/api/v1/game/${gameId}`)
             if(!response.ok) {
                 const errorMessage = `${response.status} (${response.statusText})`
@@ -44,7 +45,6 @@ const Home = (props) => {
                 throw error
             }
             const body = await response.json()
-            console.log(body.playlistTracks)
             setDropDownTracks(body.playlistTracks)
         } catch (err) {
             console.error(`Error in fetch: ${err.message}`)
@@ -65,7 +65,13 @@ const Home = (props) => {
     
     const handleSubmit = (event) => {
         event.preventDefault()
-        postSongTitleGuess()
+        let trackId
+        dropDownTracks.forEach(track => {
+            if (track.title === songSearch) {
+                trackId = track.id
+            }
+        })
+        postSongTitleGuess(trackId)
     };
     
     const feedbackTiles = guessedSongs.map((song) => {
