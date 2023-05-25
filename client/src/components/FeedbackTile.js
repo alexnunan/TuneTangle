@@ -1,6 +1,6 @@
 import React from "react"
 
-const FeedbackTile = ({title, artist, album, genre, releaseYear, duration}) => {
+const FeedbackTile = ({title, artist, album, genres, releaseDate, duration}) => {
 
     const reformatDuration = (timeInSeconds) => {
         const minutes = Math.floor(timeInSeconds/60)
@@ -24,10 +24,10 @@ const FeedbackTile = ({title, artist, album, genre, releaseYear, duration}) => {
                 <p className="vertically-align-feedback">{album}</p>
             </div>
             <div className="cell small-2 feedback-section">
-                <p className="vertically-align-feedback">{genre}</p>
+                <p className="vertically-align-feedback">{genres}</p>
             </div>
             <div className="cell small-2 feedback-section">
-                <p className="vertically-align-feedback">{releaseYear}</p>
+                <p className="vertically-align-feedback">{releaseDate}</p>
             </div>
             <div className="cell small-2 feedback-section">
                 <p className="vertically-align-feedback">{reformatDuration(duration)}</p>
