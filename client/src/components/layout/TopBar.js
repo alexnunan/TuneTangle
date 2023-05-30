@@ -26,7 +26,10 @@ const TopBar = ({ user }) => {
           <ul className="menu">
             <li className="menu-text">TuneTangle</li>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/">Sign In</Link>
+            </li>
+            <li>
+              <Link to="/playlistSelection">Choose a Playlist</Link>
             </li>
           </ul>
         </div>

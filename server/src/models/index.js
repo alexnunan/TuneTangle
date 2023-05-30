@@ -1,6 +1,6 @@
 // include all of your models here using CommonJS requires
 const User = require("./User.js")
-const Track = require("./Track.js")
 const Game = require("./Game.js")
+const Guess = require("./Guess.js")
 
-module.exports = {User, Track, Game};
+module.exports = { User, Game, Guess} ;
