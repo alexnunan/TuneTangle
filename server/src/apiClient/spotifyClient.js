@@ -121,28 +121,32 @@ class spotifyClient {
                     genres.push(genre)
                 })                
             } else {
-                genres.push(["Spotify has not added any genres to this track"])
+                genres.push("Spotify has not added any genres to this track")
             }
 
-            return {
+            let dateArray = basicData.album.release_date.split("-")
+            let releaseYear = dateArray[0]
+            
+            releaseYear = parseInt(releaseYear)
+
+            const trackObject = {
                 title: basicData.name,
                 artist: artistNames,
                 album: basicData.album.name,
-                releaseDate: basicData.album.release_date,
-                releaseDateType: basicData.album.release_date_precision,
+                releaseYear: releaseYear,
                 duration: basicData.duration_ms,
                 trackUrl: basicData.external_urls.spotify,
                 imageUrl: basicData.album.images[0].url,
-                popularity: basicData.popularity,
-                danceability: advancedData.danceability,
-                energy: advancedData.energy,
-                key: advancedData.key,
-                loudness: advancedData.loudness,
-                tempo: advancedData.tempo,
-                valence: advancedData.valence,
-                instrumentalness: advancedData.instrumentalness,
+                popularity: basicData.popularity, // 100 is the most popular song on spotify
+                danceability: advancedData.danceability, // accounts for tempo, rhythm stability, bear strength, overall regularity
+                energy: advancedData.energy, // accounts for dynamic range, perceived loudness, timre, onset rate, and general entropy
+                loudness: advancedData.loudness, //average decibals
+                tempo: advancedData.tempo, // BPM
+                valence: advancedData.valence, //positivity - High is happy
+                instrumentalness: advancedData.instrumentalness, // if .5 < inst, no vocals, if 1, very high confidence
                 genres: genres
             }
+            return trackObject
         } catch (err) {
             console.log(err.message)
             return { errors: err.message }
