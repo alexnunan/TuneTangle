@@ -4,7 +4,6 @@ import { hot } from "react-hot-loader/root";
 
 import getCurrentUser from "../services/getCurrentUser";
 import "../assets/scss/main.scss";
-import TopBar from "./layout/TopBar";
 import Home from "./Home";
 import playlistSelection from "./playlistSelection";
 import LoginPage from "./LoginPage";
@@ -26,7 +25,6 @@ const App = (props) => {
 
   return (
     <Router>
-      <TopBar user={currentUser} />
       <Switch>
         <Route exact path="/" component={LoginPage} />
         <Route exact path="/playlistSelection" component={playlistSelection} />
