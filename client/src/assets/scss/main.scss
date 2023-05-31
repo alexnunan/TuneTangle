@@ -16,10 +16,8 @@
 
 $masterFont: 'Montserrat' sans-serif;
 
-#body {
-  padding: 0%;
-  margin: 0%;
-  height: 100%;
+#app {
+  min-height: 100vh;
   background: linear-gradient(180deg, #8629FF 0%, #553AC0 100%);
 }
 
