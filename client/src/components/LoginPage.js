@@ -3,6 +3,7 @@ import React from "react";
 const LoginPage = () => {
     return (
         <div className="login-container">
+            <h1 className="title-header">TuneTangle</h1>
             <div className="login-content">
                 <h2 className="login-header">How to Play</h2>
                 <div className="login-instructions">

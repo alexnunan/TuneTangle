@@ -125,21 +125,37 @@ const Home = (props) => {
     })
 
     return (
-        <div>
+        <div className="thingy">
             <h1 className="home-header">Tune Tangle</h1>
             <div className="song-search">
                 <form onSubmit={handleSubmit} className="form">
                     <div className="form__center-content">
-                        <Autocomplete
-                            disablePortal
-                            id="combo-box-demo"
-                            onChange={handleDropdownSelection}
-                            options={dropDownOptions}
-                            className="input-text"
-                            sx={{ width: 400 }}
-                            renderInput={(params) => <TextField {...params} onChange={handleInputChange}/>}
-                        />
-                        <input type="submit" value="Submit" className="input-submit" />
+                        <div>
+                            <Autocomplete
+                                disablePortal
+                                id="combo-box-demo"
+                                onChange={handleDropdownSelection}
+                                options={dropDownOptions}
+                                sx={{
+                                    border: "none",
+                                    borderRadius: "16px",
+                                    width: 400,
+                                    "& .MuiOutlinedInput-root": {
+                                        border: "none",
+                                        borderRadius: "16px",
+                                        padding: "0",
+                                        backgroundColor: "white"
+                                    },
+                                    "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+                                        border: "none",
+                                        borderRadius: "16px"
+                                    },
+                                }}
+                                
+                                renderInput={(params) => <TextField className="textfield"{...params} onChange={handleInputChange}/>}
+                            />
+                        </div>
+                        <input type="submit" value="Search" className="input-submit" />
                     </div>
                 </form> 
             </div>

@@ -1,6 +1,7 @@
 @import "./foundation/settings";
 @import "~foundation-sites/scss/foundation";
 @include foundation-everything;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
 *,
 *::before,
@@ -13,8 +14,20 @@
   tab-size: 4;
 }
 
+#body {
+  padding: 0%;
+  margin: 0%;
+  height: 100%;
+  background: linear-gradient(180deg, #8629FF 0%, #553AC0 100%);
+}
+
+.thingy {
+  color: white;
+}
+
 .home-header {
   text-align: center;
+  margin-top: 15px;
 }
 
 .feedback-headers {
@@ -54,6 +67,13 @@
 
 .input-submit {
   border-radius: 16px;
+  margin-left: 10px;
+  border-style: solid;
+  border-color: #FFFFFF;
+  background-color: transparent;
+  color:white;
+  width: 101px;
+  height: 39px
 }
 
 .small-margin {
@@ -68,13 +88,18 @@
   justify-content: center;
 }
 
+.title-header {
+  font-family: Montserrat;
+  color: white;
+}
+
 .login-container {
+  margin-top: 5%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  background-color: #F4F4F4;
+  margin-bottom: 10%;
 }
 
 .login-content {
@@ -115,7 +140,7 @@
 .login-note {
   font-size: 14px;
   margin-bottom: 20px;
-  color: #333333;
+  color: #ffffff;
 }
 
 .login-button-container {
@@ -171,4 +196,8 @@
 
 .release-year-section {
   text-align: center;
+}
+
+#combo-box-demo {
+  border-radius: 16px;
 }
