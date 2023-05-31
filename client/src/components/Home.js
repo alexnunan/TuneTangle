@@ -151,7 +151,6 @@ const Home = (props) => {
                                         borderRadius: "16px"
                                     },
                                 }}
-                                
                                 renderInput={(params) => <TextField className="textfield"{...params} onChange={handleInputChange}/>}
                             />
                         </div>

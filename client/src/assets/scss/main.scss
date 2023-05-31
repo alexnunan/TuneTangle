@@ -1,7 +1,7 @@
 @import "./foundation/settings";
 @import "~foundation-sites/scss/foundation";
 @include foundation-everything;
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;0,800;1,700&display=swap');
 
 *,
 *::before,
@@ -14,6 +14,8 @@
   tab-size: 4;
 }
 
+$masterFont: 'Montserrat' sans-serif;
+
 #body {
   padding: 0%;
   margin: 0%;
@@ -21,13 +23,12 @@
   background: linear-gradient(180deg, #8629FF 0%, #553AC0 100%);
 }
 
-.thingy {
-  color: white;
-}
-
 .home-header {
   text-align: center;
   margin-top: 15px;
+  font-family: $masterFont;
+  font-weight: bold;
+  color: white;
 }
 
 .feedback-headers {
@@ -37,10 +38,13 @@
 
 .feedback-section {
   text-align: center;
-  background-color: rgb(197, 194, 194);
+  background-color: transparent;
   border-style: solid;
-  border-color: black;
-  margin-bottom: 10px;
+  border-color: white;
+  border-right: none;
+  border-left: none;
+  border-width: 1px;
+  padding-top: 10px;
 }
 
 .feedback-body {
@@ -200,4 +204,28 @@
 
 #combo-box-demo {
   border-radius: 16px;
+  font-family: $masterFont;
+}
+
+.general-text {
+  font-family: $masterFont;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+}
+
+.playlist-buttons {
+  background-color: transparent;
+  border-radius: 16px;
+  border-style: solid;
+  border-color: white;
+  color: white;
+}
+
+.playlist-selection {
+  text-align: center;
+  justify-content: center;
+}
+.thingy {
+  color:white
 }

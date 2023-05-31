@@ -57,7 +57,7 @@ const playlistSelection = () => {
 
     const displayUserPlaylists = userPlaylists.map((playlist, index) => {
         return (
-            <p onClick={ ()=> {postSelectedPlaylist(playlist.spotifyId)}} className="small-margin button" key={index}>{playlist.name}</p>
+            <p onClick={ ()=> {postSelectedPlaylist(playlist.spotifyId)}} className="small-margin button playlist-buttons" key={index}>{playlist.name}</p>
         )
     })
 
@@ -68,8 +68,8 @@ const playlistSelection = () => {
     return (
         <div>
             <h1 className="home-header">Select Your Playlist</h1>
-            <div>
-                <h5>Your Playlists</h5>
+            <div className="playlist-selection">
+                <h5 className="general-text">Your Playlists</h5>
                 {displayUserPlaylists}
             </div>
         </div>
