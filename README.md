@@ -4,7 +4,7 @@ This trivia app is designed to test a user's song knowledge. A user selects a pl
 
 App Instructions:
 
-1. Visit:
+1. Visit: tune-tangle.herokuapp.com
 2. Sign in to Spotify and accept data sharing permissions.
 3. Choose one of your playlists from the list pulled from Spotify.
 4. Make a guess at a song by entering in the search bar.
