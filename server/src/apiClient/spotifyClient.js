@@ -14,7 +14,7 @@ class spotifyClient {
             const responseItems = responseParsed.items
             const returnedPlaylists = []
             responseItems.forEach(playlist => {
-                if (playlist.tracks.total > 25) {
+                if (playlist.tracks.total > 1) {
                     returnedPlaylists.push({
                         name: playlist.name,
                         spotifyId: playlist.id
