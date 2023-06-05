@@ -5,8 +5,8 @@ const playlistSelectionRouter = new express.Router()
 
 playlistSelectionRouter.get("/", async (req, res) => {
     try {
-    const accessToken = req.user.accessToken
-    const userPlaylists = await spotifyClient.getUserPlaylistIds(accessToken)
+        const accessToken = req.user.accessToken
+        const userPlaylists = await spotifyClient.getUserPlaylistIds(accessToken)
         return res.status(200).json({ userPlaylists: userPlaylists })
     } catch (err) {
         return res.status(500).json({ errors: err.message })
