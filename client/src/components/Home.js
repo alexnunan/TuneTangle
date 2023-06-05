@@ -125,7 +125,7 @@ const Home = (props) => {
     })
 
     return (
-        <div className="thingy">
+        <div className="game-section">
             <h1 className="home-header">Tune Tangle</h1>
             <div className="song-search">
                 <form onSubmit={handleSubmit} className="form">
