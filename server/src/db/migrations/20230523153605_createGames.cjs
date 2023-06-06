@@ -11,6 +11,7 @@ exports.up = async (knex) => {
         table.string("playlistId").notNullable()
         table.string("randomSongId").notNullable()
         table.integer("guessCount").defaultTo(0)
+        table.integer("playlistTotal").notNullable()
         table.timestamp("createdAt").notNullable().defaultTo(knex.fn.now())
         table.timestamp("updatedAt").notNullable().defaultTo(knex.fn.now())
     })

@@ -62,7 +62,8 @@ const FeedbackTile = (props) => {
                     <p className="vertically-align-feedback">{guessedSong.title}</p>
                 </div>
                 <div className={`cell small-2 feedback-section ${artistBackground}`}>
-                    <p className="vertically-align-feedback">{guessedSong.artist}</p>
+                    <p className="vertically-align-feedback">{guessedSong.artist[0]}</p>
+                    <p className="vertically-align-feedback">{guessedSong.artist[1]}</p>
                 </div>
                 <div className={`cell small-2 feedback-section ${albumBackground}`}>
                     <p className="vertically-align-feedback">{guessedSong.album}</p>
