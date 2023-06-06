@@ -12,14 +12,11 @@ const LoginPage = () => {
                     <p>
                         Guess the song and receive feedback to help you:
                         <ul className="login-feedback-list">
-                            <li>The song's title will appear grayed out until you guess it correctly.</li>
-                            <li>When you guess the correct artist, it will be highlighted in yellow.</li>
-                            <li>If you guess the correct album, it will be highlighted in green.</li>
-                            <li>The release year will be displayed in yellow if your guessed year is within 5 years of the actual release.</li>
-                            <li>
-                                Genre feedback: The genres of the guessed song will be shown in yellow if they match at least one genre of the random song.
-                                They will be shown in green if all the genres match.
-                            </li>
+                            <li>The song's title and data will appear green when guessed correctly.</li>
+                            <li>The song's artist(s) will appear green if the guessed song's artist matches.</li>
+                            <li>The song's album will appear green if the guessed song's album matches.</li>
+                            <li>The closest guessed release years will appear to the left and right of the correct release year </li>
+                            <li>Popularity, BPM, and Vocal Presence will indicate whether the values need to be higher or lower.</li>
                         </ul>
                     </p>
                     <p>Win by guessing correctly or have nine more attempts.</p>
