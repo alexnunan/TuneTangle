@@ -22,14 +22,14 @@ const playlistSelection = () => {
         }
     }
 
-    const postSelectedPlaylist = async (playlistId) => {
+    const postSelectedPlaylist = async (playlistId, total) => {
         try {
             const response = await fetch("/api/v1/game", {
                 method: "POST",
                 headers: new Headers({
                     "Content-Type": "application/json"
                 }),
-                body: JSON.stringify( { playlistId: playlistId } )
+                body: JSON.stringify( { playlistId: playlistId, trackTotal: total } )
             })
             if (!response.ok) {
                 if (response.status === 422) {
@@ -57,7 +57,10 @@ const playlistSelection = () => {
 
     const displayUserPlaylists = userPlaylists.map((playlist, index) => {
         return (
-            <p onClick={ ()=> {postSelectedPlaylist(playlist.spotifyId)}} className="small-margin button playlist-buttons" key={index}>{playlist.name}</p>
+            <div onClick={ ()=> {postSelectedPlaylist(playlist.spotifyId, playlist.total)}} className="button playlist-buttons" key={index}>
+                <p className="playlist-name">{playlist.name}</p> 
+                <p className="track-total">{playlist.total} tracks</p>
+            </div>
         )
     })
 

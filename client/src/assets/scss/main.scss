@@ -218,6 +218,8 @@ $masterFont: 'Montserrat' sans-serif;
   border-style: solid;
   border-color: white;
   color: white;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .playlist-selection {
@@ -229,4 +231,14 @@ $masterFont: 'Montserrat' sans-serif;
 .game-section {
   color:white;
   margin-bottom: 10%;
+}
+
+.playlist-name {
+  margin: 5px;
+}
+
+.track-total {
+  font-size: smaller;
+  font-style: italic;
+  margin: 0px;
 }

@@ -11,10 +11,11 @@ gameRouter.post("/", async (req, res) => {
         const { body } = req
         const selectedPlaylistId = body.playlistId
         const accessToken = req.user.accessToken
+        const trackTotal = body.trackTotal
         
-        const randomSongId = await spotifyClient.getRandomTrackIdByPlaylist(accessToken, selectedPlaylistId)
+        const randomSongId = await spotifyClient.getRandomTrackIdByPlaylist(accessToken, selectedPlaylistId, trackTotal)
 
-        const newGame = await Game.query().insertAndFetch({playlistId: selectedPlaylistId, randomSongId: randomSongId})
+        const newGame = await Game.query().insertAndFetch({playlistId: selectedPlaylistId, randomSongId: randomSongId, playlistTotal: trackTotal})
 
         return res.status(200).json({ newGameId : newGame.id })
     } catch (err) {
@@ -27,7 +28,7 @@ gameRouter.get("/:id", async (req, res) => {
         const accessToken = req.user.accessToken
         const { id } = req.params
         const game = await Game.query().findById(id)
-        const playlistTracks = await spotifyClient.getPlaylistTracks(accessToken, game.playlistId)
+        const playlistTracks = await spotifyClient.getPlaylistTracks(accessToken, game.playlistId, game.playlistTotal)
         const randomSongData = await spotifyClient.getTrackData(accessToken, game.randomSongId)
         return res.status(200).json({ playlistTracks, randomSongData })
     } catch (err) {

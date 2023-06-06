@@ -14,10 +14,11 @@ class spotifyClient {
             const responseItems = responseParsed.items
             const returnedPlaylists = []
             responseItems.forEach(playlist => {
-                if (playlist.tracks.total > 1) {
+                if (playlist.tracks.total < 2000 && playlist.tracks.total > 5) {
                     returnedPlaylists.push({
                         name: playlist.name,
-                        spotifyId: playlist.id
+                        spotifyId: playlist.id,
+                        total: playlist.tracks.total
                     })
                 }
             })
@@ -28,16 +29,23 @@ class spotifyClient {
         }
     }
 
-    static async getRandomTrackIdByPlaylist(accessToken, playlistId) {
+    static async getRandomTrackIdByPlaylist(accessToken, playlistId, total) {
         try {
-            const url = `https://api.spotify.com/v1/playlists/${playlistId}`
-            const apiResponse = await got(url, {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`
-                }
-            })
-            const responseParsed = await JSON.parse(apiResponse.body)
-            const trackList = responseParsed.tracks.items
+            let trackList = []
+            let offset = 0
+            while (trackList.length < total) {
+                const url = `https://api.spotify.com/v1/playlists/${playlistId}/tracks?offset=${offset}&limit=100`
+                const apiResponse = await got(url, {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`
+                    }
+                })
+                const responseParsed = await JSON.parse(apiResponse.body)
+                responseParsed.items.forEach(item => {
+                    trackList.push(item)
+                })
+                offset += 100
+            }
             const randomTrack = trackList[Math.floor(Math.random()*trackList.length)]
             return randomTrack.track.id
         } catch (err) {
@@ -46,26 +54,33 @@ class spotifyClient {
         }
     }
 
-    static async getPlaylistTracks(accessToken, playlistId) {
+    static async getPlaylistTracks(accessToken, playlistId, total) {
         try {
-            const url = `https://api.spotify.com/v1/playlists/${playlistId}`
-            const apiResponse = await got(url, {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`
-                }
-            })
-            const responseParsed = await JSON.parse(apiResponse.body)
-            const trackList = responseParsed.tracks.items
-            const playlistTracks = []
+            let playlistTracks = []
+            let trackList = []
+            let offset = 0
+            while (trackList.length < total){
+                const url = `https://api.spotify.com/v1/playlists/${playlistId}/tracks?limit=100&offset=${offset}`
+                const apiResponse = await got(url, {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`
+                    }
+                })
+                const responseParsed = await JSON.parse(apiResponse.body)
+                responseParsed.items.forEach(item => {
+                    trackList.push(item)
+                })
+                offset += 100  
+            }
             trackList.forEach(item => {
                 playlistTracks.push({
                     title: item.track.name,
                     id: item.track.id
                 })
             })
+            console.log(playlistTracks.length)
             return playlistTracks
         } catch (err) {
-            console.log(err.message)
             return { errors: err.message }
         }
     }
