@@ -7,7 +7,7 @@ import "../assets/scss/main.scss";
 import RegistrationForm from "./registration/RegistrationForm";
 import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
-import PlaylistSelection from "./PlaylistSelection"
+import PlaylistSelection from "./playlistSelection"
 import LoginPage from "./LoginPage";
 import Home from "./Home"
 
