@@ -4,47 +4,40 @@ import SignOutButton from "../authentication/SignOutButton";
 
 const TopBar = ({ user }) => {
   const unauthenticatedListItems = [
-    <div className="top-bar center-parent center-child">
-        <ul className="menu">
-          <li>
-            <h1>TuneTangle</h1>
-          </li>
-        </ul>
-    </div>
+    <li className="sign-in" key="sign-in">
+      <Link to="/user-sessions/new">Sign In</Link>
+    </li>,
+    <li className="sign-up" key="sign-up">
+      <Link to="/users/new">
+        Sign Up
+      </Link>
+    </li>,
   ];
 
   const authenticatedListItems = [
-    <li key="sign-out">
+    <li className="sign-in" key="sign-out">
       <SignOutButton />
     </li>,
   ];
 
-  if (user) {
-    return (
-      <div className="top-bar">
-        <div className="top-bar-left">
-          <ul className="menu">
-            <li className="menu-text">TuneTangle</li>
-            <li>
-              <Link to="/">Sign In</Link>
-            </li>
-            <li>
-              <Link to="/playlistSelection">Choose a Playlist</Link>
-            </li>
-          </ul>
-        </div>
-        <div className="top-bar-right">
-          <ul className="menu">{authenticatedListItems}</ul>
-        </div>
+  const selectPlaylist = (
+  <li className="playlist-selection-link">
+    <Link to="/playlistSelection">{user ? `Select a Playlist` : ``}</Link>
+  </li>
+  )
+
+  return (
+    <div className="top-bar">
+      <div className="top-bar-left">
+        <ul className="menu">
+          {user ? selectPlaylist : <li></li>}
+        </ul>
       </div>
-    );
-  } else {
-    return (
-      <div>
-        {unauthenticatedListItems}
+      <div className="top-bar-right">
+        <ul className="menu">{user ? authenticatedListItems : unauthenticatedListItems}</ul>
       </div>
-    )
-  }
+    </div>
+  );
 };
 
 export default TopBar;

@@ -1,23 +1,47 @@
 /* eslint-disable import/no-extraneous-dependencies */
+const Bcrypt = require("bcrypt");
+const unique = require("objection-unique");
 const Model = require("./Model");
 
-class User extends Model {
+const saltRounds = 10;
+
+const uniqueFunc = unique({
+  fields: ["email"],
+  identifiers: ["id"],
+});
+
+class User extends uniqueFunc(Model) {
   static get tableName() {
     return "users";
   }
 
-  static get relationMappings() {
-    const { Guess } = require("./index.js")
+  set password(newPassword) {
+    this.cryptedPassword = Bcrypt.hashSync(newPassword, saltRounds);
+  }
+
+  authenticate(password) {
+    return Bcrypt.compareSync(password, this.cryptedPassword);
+  }
+
+  static get jsonSchema() {
     return {
-      guesses: {
-        relation: Model.HasManyRelation,
-        modelClass: Guess,
-        join: {
-          from: "users.id",
-          to: "guesses.userId"
-        }
-      }
+      type: "object",
+      required: ["email"],
+      properties: {
+        email: { type: "string", pattern: "^\\S+@\\S+\\.\\S+$" },
+        cryptedPassword: { type: "string" },
+      },
+    };
+  }
+
+  $formatJson(json) {
+    const serializedJson = super.$formatJson(json);
+
+    if (serializedJson.cryptedPassword) {
+      delete serializedJson.cryptedPassword;
     }
+
+    return serializedJson;
   }
 }
 

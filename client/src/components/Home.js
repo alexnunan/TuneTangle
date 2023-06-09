@@ -126,7 +126,7 @@ const Home = (props) => {
 
     return (
         <div className="game-section">
-            <h1 className="home-header">Tune Tangle</h1>
+            <h1 className="home-header">TuneTangle</h1>
             <div className="song-search">
                 <form onSubmit={handleSubmit} className="form">
                     <div className="form__center-content">
@@ -154,7 +154,7 @@ const Home = (props) => {
                                 renderInput={(params) => <TextField className="textfield"{...params} onChange={handleInputChange}/>}
                             />
                         </div>
-                        <input type="submit" value="Search" className="input-submit" />
+                        <input type="submit" value="Search" className="input-submit sign-in" />
                     </div>
                 </form> 
             </div>
@@ -168,8 +168,8 @@ const Home = (props) => {
                     <p className="years-display">{yearsObject.highYear}</p>
                 </div>
             </div>
-        <div className="grid-x feedback-body">
-            <div className="cell small-2 feedback-headers">
+            <div className="grid-x feedback-body">
+                <div className="cell small-2 feedback-headers">
                     <p>Title:</p>
                 </div>
                 <div className="cell small-2 feedback-headers">
@@ -190,9 +190,9 @@ const Home = (props) => {
             </div>
             {feedbackTiles}
             <Modal
-            isOpen={guessCorrect}
-            onRequestClose={() => setGuessCorrect(false)}
-            className="modal-content">
+                isOpen={guessCorrect}
+                onRequestClose={() => setGuessCorrect(false)}
+                className="modal-content">
                 <div>
                     <h4>You Win!</h4>
                     <p>{`The random song was ${randomSongData.title} `}</p>
