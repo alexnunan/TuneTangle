@@ -2,30 +2,23 @@ import got from "got"
 
 class spotifyClient {
 
-    static async getUserPlaylistIds(accessToken) {
+    static async getNewAccessToken(refreshToken) {
         try {
-            const url = `https://api.spotify.com/v1/me/playlists`
-            const apiResponse = await got(url, {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`
-                }
-            })
-            const responseParsed = await JSON.parse(apiResponse.body)
-            const responseItems = responseParsed.items
-            const returnedPlaylists = []
-            responseItems.forEach(playlist => {
-                if (playlist.tracks.total < 2000 && playlist.tracks.total > 5) {
-                    returnedPlaylists.push({
-                        name: playlist.name,
-                        spotifyId: playlist.id,
-                        total: playlist.tracks.total
-                    })
-                }
-            })
-            return returnedPlaylists
-        } catch (err) {
-            console.log(err.message)
-            return { errors: err.message }
+            const response = await got.post('https://accounts.spotify.com/api/token', {
+                form: {
+                    grant_type: 'refresh_token',
+                    refresh_token: refreshToken,
+                    client_id: process.env.SPOTIFY_CLIENT_ID,
+                    client_secret: process.env.SPOTIFY_CLIENT_SECRET,
+                },
+                responseType: 'json',
+            });
+            
+            const newAccessToken = response.body.access_token;
+
+            return newAccessToken
+        } catch (error) {
+            console.log(error.message);
         }
     }
 

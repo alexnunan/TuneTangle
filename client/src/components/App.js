@@ -4,9 +4,12 @@ import { hot } from "react-hot-loader/root";
 
 import getCurrentUser from "../services/getCurrentUser";
 import "../assets/scss/main.scss";
-import Home from "./Home";
-import playlistSelection from "./playlistSelection";
+import RegistrationForm from "./registration/RegistrationForm";
+import SignInForm from "./authentication/SignInForm";
+import TopBar from "./layout/TopBar";
+import PlaylistSelection from "./PlaylistSelection"
 import LoginPage from "./LoginPage";
+import Home from "./Home"
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -25,9 +28,12 @@ const App = (props) => {
 
   return (
     <Router>
+      <TopBar user={currentUser} />
       <Switch>
-        <Route exact path="/" component={LoginPage} />
-        <Route exact path="/playlistSelection" component={playlistSelection} />
+        <Route exact path="/" component={LoginPage}></Route>
+        <Route exact path="/playlistSelection" component={PlaylistSelection}></Route>
+        <Route exact path="/users/new" component={RegistrationForm} />
+        <Route exact path="/user-sessions/new" component={SignInForm} />
         <Route exact path="/game/:id" component={Home} />
       </Switch>
     </Router>

@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 
 const playlistSelection = () => {
 
-    const [userPlaylists, setUserPlaylists] = useState([])
+    const [playlists, setPlaylists] = useState([])
     const [gameId, setGameId] = useState(null)
     const [shouldRedirect, setShouldRedirect] = useState(false)
 
@@ -16,7 +16,7 @@ const playlistSelection = () => {
                 throw error
             }
             const body = await response.json()
-            setUserPlaylists(body.userPlaylists)
+            setPlaylists(body.playlists)
         } catch (err) {
             console.error(`Error in fetch: ${err.message}`)
         }
@@ -55,11 +55,11 @@ const playlistSelection = () => {
         getUserPlaylists();
     },[])
 
-    const displayUserPlaylists = userPlaylists.map((playlist, index) => {
+    const displayUserPlaylists = playlists.map((playlist, index) => {
         return (
-            <div onClick={ ()=> {postSelectedPlaylist(playlist.spotifyId, playlist.total)}} className="button playlist-buttons" key={index}>
+            <div onClick={ ()=> {postSelectedPlaylist(playlist.playlistId, playlist.playlistTotal)}} className="button playlist-buttons" key={index}>
                 <p className="playlist-name">{playlist.name}</p> 
-                <p className="track-total">{playlist.total} tracks</p>
+                <p className="track-total">{playlist.playlistTotal} tracks</p>
             </div>
         )
     })

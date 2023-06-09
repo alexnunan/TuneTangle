@@ -23,7 +23,7 @@ $masterFont: 'Montserrat' sans-serif;
 
 .home-header {
   text-align: center;
-  margin-top: 15px;
+  margin-top: -15px;
   font-family: $masterFont;
   font-weight: bold;
   color: white;
@@ -41,6 +41,7 @@ $masterFont: 'Montserrat' sans-serif;
   border-color: white;
   border-right: none;
   border-left: none;
+  border-bottom: none;
   border-width: 1px;
   padding-top: 10px;
 }
@@ -93,11 +94,11 @@ $masterFont: 'Montserrat' sans-serif;
 .title-header {
   font-family: Montserrat;
   color: white;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 
 .login-container {
-  margin-top: 2.5%;
+  margin-top: -40px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -144,24 +145,6 @@ $masterFont: 'Montserrat' sans-serif;
   font-size: 14px;
   margin-bottom: 20px;
   color: #ffffff;
-}
-
-.login-button-container {
-  margin-top: 20px;
-}
-
-.login-button {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #1DB954;
-  color: #FFFFFF;
-  border-radius: 5px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-}
-
-.login-button:hover {
-  background-color: #1ed760;
 }
 
 .release-year-section {
@@ -242,4 +225,69 @@ $masterFont: 'Montserrat' sans-serif;
   font-size: smaller;
   font-style: italic;
   margin: 0px;
+}
+
+.top-bar, .top-bar ul {
+  margin-top: .5%;
+  background: transparent;
+}
+
+.playlist-selection-link, .sign-up, .sign-out {
+  color: white;
+  border-radius: 16px;
+  border-style: solid;
+  border-color: white;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.sign-in {
+  color: white;
+  border-radius: 16px;
+  border-style: solid;
+  border-color: white;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.sign-in a:focus, .sign-up a:focus {
+  color: white
+}
+
+.sign-in a, .sign-up a {
+  border-radius: 16px;
+  color: white;
+}
+
+a {
+  color:white
+}
+
+.sign-out:hover, .sign-up:hover, .sign-up a:hover, .sign-in:hover, .sign-in a:hover {
+  color: #8629FF;
+  border-color: #8629FF;
+  background-color: white;
+}
+
+.title-area {
+  color: white;
+}
+
+.sign-out {
+  line-height: 1;
+  display: block;
+  padding: 0.7rem;
+}
+
+.sign-in-form {
+  color: white;
+  font-family: $masterFont;
+}
+
+[type="text"], [type="password"] {
+  border-radius: 16px;
+}
+
+.button {
+  background-color: transparent;
 }

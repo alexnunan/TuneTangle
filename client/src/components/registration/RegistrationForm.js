@@ -88,22 +88,22 @@ const RegistrationForm = () => {
   };
 
   if (shouldRedirect) {
-    location.href = "/";
+    location.href = "/playlistSelection";
   }
 
   return (
-    <div className="grid-container">
+    <div className="grid-container sign-in-form">
       <h1>Register</h1>
       <form onSubmit={onSubmit}>
         <div>
-          <label>
+          <label className="sign-in-form">
             Email
             <input type="text" name="email" value={userPayload.email} onChange={onInputChange} />
             <FormError error={errors.email} />
           </label>
         </div>
         <div>
-          <label>
+          <label className="sign-in-form">
             Password
             <input
               type="password"
@@ -115,7 +115,7 @@ const RegistrationForm = () => {
           </label>
         </div>
         <div>
-          <label>
+          <label className="sign-in-form">
             Password Confirmation
             <input
               type="password"
@@ -127,7 +127,7 @@ const RegistrationForm = () => {
           </label>
         </div>
         <div>
-          <input type="submit" className="button" value="Register" />
+          <input type="submit" className="button sign-in" value="Register" />
         </div>
       </form>
     </div>
