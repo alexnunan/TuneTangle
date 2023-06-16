@@ -292,3 +292,24 @@ a {
 .button {
   background-color: transparent;
 }
+
+.modal-button {
+  margin-top: 5%;
+  border-color: #8629FF;
+  color: #8629FF;
+  border-radius: 16px;
+}
+
+.modal-button:hover {
+  border-color: white;
+  color: white;
+  background-color: #8629FF;
+}
+
+.album-image {
+  height: 60%;
+  width: 50%;
+  border-style: solid;
+  border-color: #8629FF;
+  border-width: 2px;
+}

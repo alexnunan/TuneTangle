@@ -197,7 +197,8 @@ const Home = (props) => {
                     <h4>You Win!</h4>
                     <p>{`The random song was ${randomSongData.title} `}</p>
                 </div>
-                <a href="/playlistSelection" className="button">Select a new playlist</a>
+                <img className="album-image" src={`${randomSongData.imageUrl}`}></img>
+                <a href="/playlistSelection" className="modal-button button">Select a new playlist</a>
             </Modal>
         </div>
     )
