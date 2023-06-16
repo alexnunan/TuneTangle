@@ -70,9 +70,9 @@ const playlistSelection = () => {
 
     return (
         <div>
-            <h1 className="home-header">Select Your Playlist</h1>
+            <h1 className="home-header">Select a Playlist</h1>
             <div className="playlist-selection">
-                <h5 className="general-text">Your Playlists</h5>
+                <h5 className="general-text">Stock Playlists</h5>
                 {displayUserPlaylists}
             </div>
         </div>

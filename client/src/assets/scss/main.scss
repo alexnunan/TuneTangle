@@ -212,6 +212,7 @@ $masterFont: 'Montserrat' sans-serif;
   margin-left: 10%;
   margin-right: 10%;
 }
+
 .game-section {
   color:white;
   margin-bottom: 10%;
@@ -250,11 +251,11 @@ $masterFont: 'Montserrat' sans-serif;
   margin-right: 5px;
 }
 
-.sign-in a:focus, .sign-up a:focus {
+.sign-in a:focus, .sign-up a:focus, .playlist-selection-link a:focus {
   color: white
 }
 
-.sign-in a, .sign-up a {
+.sign-in a, .sign-up a, .playlist-selection-link a {
   border-radius: 16px;
   color: white;
 }
@@ -263,7 +264,7 @@ a {
   color:white
 }
 
-.sign-out:hover, .sign-up:hover, .sign-up a:hover, .sign-in:hover, .sign-in a:hover {
+.sign-out:hover, .sign-up:hover, .sign-up a:hover, .sign-in:hover, .sign-in a:hover, .playlist-selection-link:hover, .playlist-selection-link a:hover {
   color: #8629FF;
   border-color: #8629FF;
   background-color: white;
