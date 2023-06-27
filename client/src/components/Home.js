@@ -3,6 +3,10 @@ import FeedbackTile from "./FeedbackTile";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField"
 import Modal from "react-modal";
+import { faCirclePlay } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Howl, Howler } from 'howler';
+
 
 const Home = (props) => {
     const [songSearch, setSongSearch] = useState("")
@@ -11,13 +15,38 @@ const Home = (props) => {
     const [randomSongData, setRandomSongData] = useState({})
     const [guessCorrect, setGuessCorrect] = useState(false)
     const [releaseYears, setReleaseYears] = useState([])
+    const [previewUrl, setPreviewUrl] = useState("")
     const [yearsObject, setYearsObject] = useState({
         lowYear: "?",
         highYear: "?",
         songDate: "?"
     })
-    console.log(randomSongData)
+    const [audioPlayer, setAudioPlayer] = useState(null);
+
     const gameId = props.match.params.id
+
+    const handleAudioPlayback = () => {
+        if (audioPlayer && previewUrl) {
+            const playbackDuration = (guessedSongs.length + 1) * 1000; // Increase duration by 3 seconds for each guess
+            audioPlayer.stop(); // Stop the currently playing audio
+            audioPlayer.seek(0); // Restart the audio from the beginning
+            audioPlayer.src = previewUrl;
+            audioPlayer.play();
+            setTimeout(() => {
+                audioPlayer.pause();
+                }, playbackDuration);
+        }
+    };
+
+    useEffect(() => {
+        if (previewUrl) {
+            const sound = new Howl({
+            src: [previewUrl],
+            html5: true,
+            });
+            setAudioPlayer(sound);
+        }
+    }, [previewUrl]);
 
     const getReleaseYearFeedback = (releaseYears) => {
         if(releaseYears.length>0){
@@ -82,6 +111,7 @@ const Home = (props) => {
             const body = await response.json()
             setDropDownTracks(body.playlistTracks)
             setRandomSongData(body.randomSongData)
+            setPreviewUrl(body.randomSongData.previewUrl)
         } catch (err) {
             console.error(`Error in fetch: ${err.message}`)
         }
@@ -115,7 +145,7 @@ const Home = (props) => {
         postSongTitleGuess(trackId)
         setSongSearch("") 
     };
-    
+
     const feedbackTiles = guessedSongs.map((song, index) => {
         return <FeedbackTile key={song.id} guessedSong={song} />;
     })
@@ -157,6 +187,9 @@ const Home = (props) => {
                         <input type="submit" value="Search" className="input-submit sign-in" />
                     </div>
                 </form> 
+            </div>
+            <div className="play-bar-section">
+                <FontAwesomeIcon onClick={handleAudioPlayback} className="play-button" icon={faCirclePlay} />
             </div>
             <div className="release-year-section">
                 <h5>Release Year</h5>

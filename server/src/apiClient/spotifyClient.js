@@ -152,7 +152,8 @@ class spotifyClient {
                 tempo: advancedData.tempo, // BPM
                 valence: advancedData.valence, //positivity - High is happy
                 instrumentalness: advancedData.instrumentalness, // if .5 < inst, no vocals, if 1, very high confidence
-                genres: genres
+                genres: genres,
+                previewUrl: basicData.preview_url
             }
             return trackObject
         } catch (err) {
