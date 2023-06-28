@@ -54,6 +54,7 @@ const SignInForm = () => {
           setShouldRedirect(true)
         }
       } catch(err) {
+        setErrors({...errors, password: "Either the email or password is incorrect"})
         console.error(`Error in fetch: ${err.message}`)
       }
     }

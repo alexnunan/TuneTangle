@@ -184,7 +184,7 @@ const Home = (props) => {
                                 renderInput={(params) => <TextField className="textfield"{...params} onChange={handleInputChange}/>}
                             />
                         </div>
-                        <input type="submit" value="Search" className="input-submit sign-in" />
+                        <input type="submit" value="Guess" className="input-submit sign-in" />
                     </div>
                 </form> 
             </div>
