@@ -189,6 +189,7 @@ const Home = (props) => {
                 </form> 
             </div>
             <div className="play-bar-section">
+                <p>{`Play a portion of the song (${guessedSongs.length + 1} seconds):`}</p>
                 <FontAwesomeIcon onClick={handleAudioPlayback} className="play-button" icon={faCirclePlay} />
             </div>
             <div className="release-year-section">
