@@ -8,23 +8,41 @@ gameRouter.use("/:id/guess", gameGuessRouter)
 
 gameRouter.post("/", async (req, res) => {
     try {
-        const { body } = req
-        const selectedPlaylistId = body.playlistId
-        const refreshToken = req.user.refreshToken
-        const accessToken = await spotifyClient.getNewAccessToken(refreshToken)
-        const trackTotal = body.trackTotal
-        const randomSongId = await spotifyClient.getRandomTrackIdByPlaylist(accessToken, selectedPlaylistId, trackTotal)
-        const newGame = await Game.query().insertAndFetch({playlistId: selectedPlaylistId, randomSongId: randomSongId, playlistTotal: trackTotal})
-
-        return res.status(200).json({ newGameId : newGame.id })
+        if( req.user ) {
+            const refreshToken = req.user.refreshToken
+            const accessToken = await spotifyClient.getNewAccessToken(refreshToken)
+            const { body } = req
+            const selectedPlaylistId = body.playlistId
+            const trackTotal = body.trackTotal
+            const randomSongId = await spotifyClient.getRandomTrackIdByPlaylist(accessToken, selectedPlaylistId, trackTotal)
+            const newGame = await Game.query().insertAndFetch({playlistId: selectedPlaylistId, randomSongId: randomSongId, playlistTotal: trackTotal})
+    
+            return res.status(200).json({ newGameId : newGame.id })
+        } else {
+            const refreshToken = 'AQCmgEF129Jq5W0FrAUmkYl36geGHDtTv1EyiCD85xRVT5yMA9OGWZiTyFLg_vTtUD_I44P8ZpznNwLzG7XV3vbyB6FBf1rAiEuabmuIMmqC7chZaNYCX7zOIzPOqxLsoug'
+            const accessToken = await spotifyClient.getNewAccessToken(refreshToken)
+            const { body } = req
+            const selectedPlaylistId = body.playlistId
+            const trackTotal = body.trackTotal
+            const randomSongId = await spotifyClient.getRandomTrackIdByPlaylist(accessToken, selectedPlaylistId, trackTotal)
+            const newGame = await Game.query().insertAndFetch({playlistId: selectedPlaylistId, randomSongId: randomSongId, playlistTotal: trackTotal})
+    
+            return res.status(200).json({ newGameId : newGame.id })
+        }
     } catch (err) {
         return res.status(500).json({ errors: err.message })
     }
 })
 
 gameRouter.get("/:id", async (req, res) => {
+    
     try {
-        const refreshToken = req.user.refreshToken
+        let refreshToken
+        if (req.user) {
+            refreshToken = req.user.refreshToken
+        } else {
+            refreshToken = 'AQCmgEF129Jq5W0FrAUmkYl36geGHDtTv1EyiCD85xRVT5yMA9OGWZiTyFLg_vTtUD_I44P8ZpznNwLzG7XV3vbyB6FBf1rAiEuabmuIMmqC7chZaNYCX7zOIzPOqxLsoug'
+        }
         const accessToken = await spotifyClient.getNewAccessToken(refreshToken)
         const { id } = req.params
         const game = await Game.query().findById(id)
