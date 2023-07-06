@@ -7,8 +7,10 @@ const LoginPage = () => {
             <div className="login-content">
                 <h2 className="login-header">How to Play</h2>
                 <div className="login-instructions">
-                    <p>Sign in or register an account</p>
+                    <p>Sign in or register an account, or click "Select a Playlist"</p>
                     <p>Choose a playlist to play.</p>
+                    <p>Click the play button to listen to a part of the song.</p>
+                    <p>Each guess you make will add 1 second to the song sample.</p>
                     <p>
                         Guess the song and receive feedback to help you:
                         <ul className="login-feedback-list">
