@@ -9,11 +9,14 @@ gameGuessRouter.post("/", async (req, res) => {
         const { body } = req
         const trackId = body.trackId
         const gameId = body.gameId
+        let uId
         let refreshToken
         if (req.user) {
             refreshToken = req.user.refreshToken
+            uId = req.user.id
         } else {
             refreshToken = 'AQCmgEF129Jq5W0FrAUmkYl36geGHDtTv1EyiCD85xRVT5yMA9OGWZiTyFLg_vTtUD_I44P8ZpznNwLzG7XV3vbyB6FBf1rAiEuabmuIMmqC7chZaNYCX7zOIzPOqxLsoug'
+            uId = 1
         }
         const accessToken = await spotifyClient.getNewAccessToken(refreshToken)
         const trackGuess = await spotifyClient.getTrackData(accessToken, trackId)
@@ -132,7 +135,8 @@ gameGuessRouter.post("/", async (req, res) => {
             instrumentalnessCheck = "more"
         }
 
-        let differenceObject = await Guess.query().insertAndFetch({userId: req.user.id, gameId, trackId, titleCorrect, artistCorrect, albumCorrect, releaseDateCheck, durationCheck, popularityCheck, danceabilityCheck, energyCheck, loudnessCheck, tempoCheck, valenceCheck, instrumentalnessCheck})
+
+        let differenceObject = await Guess.query().insertAndFetch({userId: uId, gameId, trackId, titleCorrect, artistCorrect, albumCorrect, releaseDateCheck, durationCheck, popularityCheck, danceabilityCheck, energyCheck, loudnessCheck, tempoCheck, valenceCheck, instrumentalnessCheck})
         trackGuess.differenceObject = differenceObject
         res.status(200).json({trackGuess, winStatus})
     } catch (err) {
