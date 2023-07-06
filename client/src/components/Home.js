@@ -90,7 +90,9 @@ const Home = (props) => {
                 }
             } 
             const responseBody = await response.json()
-            setGuessedSongs([...guessedSongs, responseBody.trackGuess])
+            let songGuesses = guessedSongs
+            songGuesses.unshift(responseBody.trackGuess)
+            setGuessedSongs(songGuesses)
             setReleaseYears([...releaseYears, responseBody.trackGuess.releaseYear])
             if (responseBody.winStatus) {
                 setGuessCorrect(true)
@@ -166,6 +168,7 @@ const Home = (props) => {
                                 id="combo-box-demo"
                                 onChange={handleDropdownSelection}
                                 options={dropDownOptions}
+                                defaultValue="Enter and select a song"
                                 sx={{
                                     border: "none",
                                     borderRadius: "16px",
@@ -184,7 +187,7 @@ const Home = (props) => {
                                 renderInput={(params) => <TextField className="textfield"{...params} onChange={handleInputChange}/>}
                             />
                         </div>
-                        <input type="submit" value="Search" className="input-submit sign-in" />
+                        <input type="submit" value="Guess" className="input-submit sign-in" />
                     </div>
                 </form> 
             </div>
