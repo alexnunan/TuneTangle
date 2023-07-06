@@ -22,7 +22,7 @@ const TopBar = ({ user }) => {
 
   const selectPlaylist = (
   <li className="playlist-selection-link">
-    <Link to="/playlistSelection">{user ? `Select a Playlist` : ``}</Link>
+    <Link to="/playlistSelection">Select a Playlist</Link>
   </li>
   )
 
@@ -30,7 +30,7 @@ const TopBar = ({ user }) => {
     <div className="top-bar">
       <div className="top-bar-left">
         <ul className="menu">
-          {user ? selectPlaylist : <li></li>}
+          {selectPlaylist}
         </ul>
       </div>
       <div className="top-bar-right">

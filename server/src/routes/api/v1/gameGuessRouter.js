@@ -9,7 +9,12 @@ gameGuessRouter.post("/", async (req, res) => {
         const { body } = req
         const trackId = body.trackId
         const gameId = body.gameId
-        const refreshToken = req.user.refreshToken
+        let refreshToken
+        if (req.user) {
+            refreshToken = req.user.refreshToken
+        } else {
+            refreshToken = 'AQCmgEF129Jq5W0FrAUmkYl36geGHDtTv1EyiCD85xRVT5yMA9OGWZiTyFLg_vTtUD_I44P8ZpznNwLzG7XV3vbyB6FBf1rAiEuabmuIMmqC7chZaNYCX7zOIzPOqxLsoug'
+        }
         const accessToken = await spotifyClient.getNewAccessToken(refreshToken)
         const trackGuess = await spotifyClient.getTrackData(accessToken, trackId)
         const game = await Game.query().findById(gameId)
