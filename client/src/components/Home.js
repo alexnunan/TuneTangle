@@ -76,6 +76,29 @@ const Home = (props) => {
         }
     }
 
+    let releaseYearSection = (
+    <div className="release-year-section">
+        <h5>Release Year</h5>
+        <div className="">
+            <p className="years-display">{yearsObject.lowYear}</p>
+            <p className="years-display">{`<`}</p>
+            <p className="years-display">{yearsObject.songDate}</p>
+            <p className="years-display">{`<`}</p>
+            <p className="years-display">{yearsObject.highYear}</p>
+        </div>
+    </div>)
+
+    if (releaseYears.includes(randomSongData.releaseYear)) {
+        releaseYearSection = (
+            <div className="release-year-section">
+                <h5>Release Year</h5>
+                <div>
+                    <p className="years-display">{yearsObject.songDate}</p>
+                </div>
+            </div>
+        )
+    }
+
     const postSongTitleGuess = async (trackId) => {
         try {
             const response = await fetch(`/api/v1/game/${gameId}/guess`, {
@@ -201,16 +224,7 @@ const Home = (props) => {
                 <p>{`Play a portion of the song (${guessedSongs.length + 1} seconds):`}</p>
                 <FontAwesomeIcon onClick={handleAudioPlayback} className="play-button" icon={faCirclePlay} />
             </div>
-            <div className="release-year-section">
-                <h5>Release Year</h5>
-                <div className="">
-                    <p className="years-display">{yearsObject.lowYear}</p>
-                    <p className="years-display">{`<`}</p>
-                    <p className="years-display">{yearsObject.songDate}</p>
-                    <p className="years-display">{`<`}</p>
-                    <p className="years-display">{yearsObject.highYear}</p>
-                </div>
-            </div>
+            {releaseYearSection}
             <div className="grid-x feedback-body">
                 <div className="cell small-2 feedback-headers">
                     <p>Title:</p>
