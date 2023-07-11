@@ -3,7 +3,7 @@ import FeedbackTile from "./FeedbackTile";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField"
 import Modal from "react-modal";
-import { faCirclePlay } from "@fortawesome/free-solid-svg-icons";
+import { faCirclePlay, faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Howl, Howler } from 'howler';
 
@@ -19,7 +19,7 @@ const Home = (props) => {
     const [yearsObject, setYearsObject] = useState({
         lowYear: "?",
         highYear: "?",
-        songDate: "?"
+        songDate: <FontAwesomeIcon icon={faCalendarDays} />
     })
     const [audioPlayer, setAudioPlayer] = useState(null);
 
