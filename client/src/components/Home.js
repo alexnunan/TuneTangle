@@ -38,6 +38,12 @@ const Home = (props) => {
         }
     };
 
+    if (guessCorrect) {
+        audioPlayer.seek(0)
+        audioPlayer.src = previewUrl
+        audioPlayer.play()
+    }
+
     useEffect(() => {
         if (previewUrl) {
             const sound = new Howl({
