@@ -22,6 +22,7 @@ const Home = (props) => {
         songDate: <FontAwesomeIcon icon={faCalendarDays} />
     })
     const [audioPlayer, setAudioPlayer] = useState(null);
+    const [failure, setFailure] = useState(null)
 
     const gameId = props.match.params.id
 
@@ -219,6 +220,9 @@ const Home = (props) => {
                         <input type="submit" value="Guess" className="input-submit sign-in" />
                     </div>
                 </form> 
+            </div>
+            <div className="give-up">
+                <a>Give Up?</a>
             </div>
             <div className="play-bar-section">
                 <p>{`Play a portion of the song (${guessedSongs.length + 1} seconds):`}</p>
