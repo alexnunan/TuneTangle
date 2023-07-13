@@ -264,10 +264,24 @@ a {
   color:white
 }
 
-.sign-out:hover, .sign-up:hover, .sign-up a:hover, .sign-in:hover, .sign-in a:hover, .playlist-selection-link:hover, .playlist-selection-link a:hover {
+.give-up {
+  text-align: center;
+  margin-bottom: 15px;
+  border-radius: 16px;
+  border-style: solid;
+  margin-right: 46.5%;
+  margin-left: 46.5%;
+}
+
+.give-up:hover, .give-up a:hover, .sign-out:hover, .sign-up:hover, .sign-up a:hover, .sign-in:hover, .sign-in a:hover, .playlist-selection-link:hover, .playlist-selection-link a:hover {
   color: #8629FF;
   border-color: #8629FF;
   background-color: white;
+  :first-child {
+    color: #8629FF;
+    border-color: #8629FF;
+    background-color: white;
+  }
 }
 
 .title-area {
