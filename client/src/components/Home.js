@@ -22,9 +22,13 @@ const Home = (props) => {
         songDate: <FontAwesomeIcon icon={faCalendarDays} />
     })
     const [audioPlayer, setAudioPlayer] = useState(null);
-    const [failure, setFailure] = useState(null)
+    const [failure, setFailure] = useState(false)
 
     const gameId = props.match.params.id
+
+    const handleGiveUp = () => {
+        setFailure(true)
+    }
 
     const handleAudioPlayback = () => {
         if (audioPlayer && previewUrl) {
@@ -39,7 +43,7 @@ const Home = (props) => {
         }
     };
 
-    if (guessCorrect) {
+    if (guessCorrect || failure) {
         audioPlayer.seek(0)
         audioPlayer.src = previewUrl
         audioPlayer.play()
@@ -222,7 +226,7 @@ const Home = (props) => {
                 </form> 
             </div>
             <div className="give-up">
-                <a>Give Up?</a>
+                <a onClick={handleGiveUp}>Give Up?</a>
             </div>
             <div className="play-bar-section">
                 <p>{`Play a portion of the song (${guessedSongs.length + 1} seconds):`}</p>
@@ -256,6 +260,17 @@ const Home = (props) => {
                 className="modal-content">
                 <div>
                     <h4>You Win!</h4>
+                    <p>{`The random song was ${randomSongData.title} `}</p>
+                </div>
+                <img className="album-image" src={`${randomSongData.imageUrl}`}></img>
+                <a href="/playlistSelection" className="modal-button button">Select a new playlist</a>
+            </Modal>
+            <Modal
+                isOpen={failure}
+                onRequestClose={() => setFailure(false)}
+                className="modal-content">
+                <div>
+                    <h4>You Lose</h4>
                     <p>{`The random song was ${randomSongData.title} `}</p>
                 </div>
                 <img className="album-image" src={`${randomSongData.imageUrl}`}></img>
